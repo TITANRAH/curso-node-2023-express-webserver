@@ -1,4 +1,6 @@
 
+** lo de crear docker es para tener la base de datos local
+
 1)
 npm init -y
 
@@ -28,3 +30,64 @@ npx tsc --init --outDir dist/ --rootDir src
  9) preparar funcon main en app y server 
 
  10) crear config carpeta y archivo envs.ts e instalar npm i dotenv env-var
+
+11) levantar postgres con docker 
+
+hcer el archivo gitignore e ignorar carpeta de postgres 
+
+crear el archivo de doicker compose .yaml
+
+y ejecutar docker compose up -d
+
+12) instalar prisma 
+
+npm install prisma --save-dev
+
+https://www.prisma.io/docs/getting-started/quickstart
+
+13) enlazar prisma a postgres npx prisma init --datasource-provider postgresql
+
+14) en el archivo que se genera de prisma cambiar database_url por postres_url 
+
+comentar la linea que se genera en los env 
+
+en el archivo de prisma crear el modelo en este caso de todo 
+
+15) realizar migracion para haer modificaciones en base de datos 
+
+ejecutar para hcer migracion
+npx prisma migrate dev --name init
+
+16) abrir un cliente y crear la bd con las credenciales puestas en env 
+
+en este caso con table plus
+
+17) crear carpeta data e instanciar a prisma en carpeta postgres archivo index.ts
+
+19)
+PARA USAR ALOJO DEL BACKEND EN LA NUBE https://neon.tech/ 
+
+COPIAR LA CADENA QUE ENTREGA AL ELEGIR POSTGRES Y POBNERLA 
+
+EN LA VARUIABLE DE ENTORNO DE POSTGRES_URL
+
+para migrar a una base de datos en la nube como neon 
+
+primero fui a neon cree la base y me entrego una cadena de conexion 
+
+luego comente la cadena anterior del docker y puse esta cadena 
+
+hice la migracion nuevamente 
+
+ejecutando:
+
+npm run prisma:migrate:prod
+
+nuevo script para migrar en este caso a prod
+
+recargue neon y aparecio la tabla 
+
+levante npm run dev que ahora estaria conectada a la bd de prod en neon
+
+agregue al comando de build en los script el comando que migra para asegurarme que lo haga 
+cuando pase a prod 
